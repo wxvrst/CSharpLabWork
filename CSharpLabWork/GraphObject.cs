@@ -8,26 +8,21 @@ using System.Reflection;
 
 namespace CSharpLabWork
 {
-    internal class GraphObject
+    internal abstract class GraphObject : IFigureBuilding
     {
         static Random r = new Random();
 
-        Color color;
-        int PointX { get; init; }
-        int PointY { get; init; }
-        int Width { get; init; }
-        int Height { get; init; }
-        Pen Pen { get; set; } = Pens.Green;
+        public Color color;
+        public bool Selected { get; set; }
+        public int PointX { get; init; }
+        public int PointY { get; init; }
+        public int Width { get; init; }
+        public int Height { get; init; }
+        public Pen FigurePen { get; set; } = Pens.Green;
+        public SolidBrush brush;
 
-        public void ChangePenColor(MouseEventArgs e)
-        {
-            if (e.X > PointX && e.Y > PointY && e.X < PointX + Width && e.Y < PointY + Height) 
-            {
-                Pen = Pens.Blue;
-            }
-        }
-
-        SolidBrush brush;
+        public abstract bool ContainsPoint(MouseEventArgs e);
+        public abstract void Draw(Graphics g);
         public GraphObject(int maxPointX, int maxPointY, int pointX = 0, int pointY = 0)
         {
             color = Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
@@ -45,11 +40,6 @@ namespace CSharpLabWork
                 PointY = pointY;
             }
             brush = new SolidBrush(color);
-        }
-        public void Draw(Graphics g)
-        {
-            g.FillRectangle(brush, PointX, PointY, Width, Height);
-            g.DrawRectangle(Pen, PointX, PointY, Width, Height);
         }
 
     }

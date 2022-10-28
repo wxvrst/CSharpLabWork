@@ -16,12 +16,20 @@ namespace CSharpLabWork
         }
         private void AddFigure(int pointX = 0, int pointY = 0)
         {
-            elements.Add(new GraphObject(panel1.Size.Width, panel1.Size.Height, pointX, pointY));
+            Random r = new Random();
+            if (r.Next(2) % 2 == 0) 
+            {
+                elements.Add(new Rectangle(panel1.Size.Width, panel1.Size.Height, pointX, pointY));
+            }
+            else
+            {
+                elements.Add(new Ellipse(panel1.Size.Width, panel1.Size.Height, pointX, pointY));
+            }
             panel1.Invalidate();
         }
         private void ClearFigures()
         {
-            
+            panel1.Controls.Clear();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,9 +75,23 @@ namespace CSharpLabWork
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            for (int i = elements.Count - 1; i > 0; i--) 
+            for (int i = elements.Count - 1; i >= 0; i--) 
             {
-                elements[i].ChangePenColor(e);
+                // TODO: change this shit: only one element can be selected
+                if (elements[i].ContainsPoint(e))
+                {
+                    if (!elements[i].Selected)
+                    {
+                        elements[i].FigurePen = Pens.Blue;
+                        elements[i].Selected = true;
+                    }
+                    else
+                    {
+                        elements[i].FigurePen = Pens.Green;
+                        elements[i].Selected = false;
+                    }
+                    break;
+                }
             }
             panel1.Invalidate();
         }
