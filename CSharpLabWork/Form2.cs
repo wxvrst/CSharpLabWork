@@ -16,6 +16,7 @@ namespace CSharpLabWork
         public Form2(string p1, string p2, decimal p3, bool p4)
         {
             InitializeComponent(); 
+            Random rnd = new Random();
             label1.Text = $"Pupil: {p1}    Group: {p2}";
             int n = Convert.ToInt32(p3);
             tableLayoutPanel1.RowCount = n;
@@ -28,7 +29,13 @@ namespace CSharpLabWork
                 }
                 else
                 {
-                    tableLayoutPanel1.Controls.Add(new ComboBox() { Dock = DockStyle.Fill }, 1, i + 1);
+                    ComboBox cb = new ComboBox();
+                    cb.Dock = DockStyle.Fill;
+                    for (int j = 0; j < 6; j++)
+                    {
+                        cb.Items.Add(rnd.Next(12));
+                    }
+                    tableLayoutPanel1.Controls.Add(cb, 1, i + 1);
                 }
             }
         }
