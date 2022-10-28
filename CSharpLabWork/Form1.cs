@@ -99,11 +99,13 @@ namespace CSharpLabWork
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //will move selected element or elements around the form
+            //function will move selected element or elements around the form
+            elements.Add(new Rectangle(panel1.Size.Width, panel1.Size.Height, 0, 0));
+            elements.Add(new Ellipse(panel1.Size.Width, panel1.Size.Height, 0, 0));
         }
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //will remove selected element or elements from the form
+            //function will remove selected element or elements from the form
         }
     }
 }
