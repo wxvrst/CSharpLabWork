@@ -31,6 +31,11 @@ namespace CSharpLabWork
                 MessageBox.Show("Group was not chosen");
                 condition = false;
             }
+            if (numericUpDown1.Value==0)
+            {
+                MessageBox.Show("Tasks count was not chosen");
+                condition = false;
+            }
             if (!radioButton1.Checked && !radioButton2.Checked)
             {
                 MessageBox.Show("Complexity was not chosen");
