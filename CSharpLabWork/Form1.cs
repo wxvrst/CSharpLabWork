@@ -78,6 +78,7 @@ namespace CSharpLabWork
             for (int i = elements.Count - 1; i >= 0; i--) 
             {
                 // TODO: change this shit: only one element can be selected
+                // or not only one ?
                 if (elements[i].ContainsPoint(e))
                 {
                     if (!elements[i].Selected)
@@ -94,6 +95,15 @@ namespace CSharpLabWork
                 }
             }
             panel1.Invalidate();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //will move selected element or elements around the form
+        }
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //will remove selected element or elements from the form
         }
     }
 }
