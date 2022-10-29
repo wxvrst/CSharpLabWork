@@ -21,7 +21,8 @@ namespace CSharpLabWork
         public override bool ContainsPoint(MouseEventArgs e)
         {
             // TODO: change this shit: replace Width, Height with AAxis, BAxis
-            return e.X > PointX && e.Y > PointY && e.X < PointX + Width && e.Y < PointY + Height;
+            //(x-x0)^2/a^2 + (y-y0)^2/b^2 <=1
+            return (e.X - PointX) * (e.X - PointX) / (Width * Width) + (e.Y - PointY) * (e.Y - PointY) / (Height * Height) <= 1;
         }
     }
 }
