@@ -22,13 +22,14 @@ namespace CSharpLabWork
             tableLayoutPanel1.RowCount = n;
             for (int i = 0; i < n; i++)
             {
-                tableLayoutPanel1.Controls.Add(new TextBox() { Text = $"Some simple task #{i}", Dock = DockStyle.Fill, ReadOnly = true }, 0, i + 1);
                 if (p4)
                 {
+                    tableLayoutPanel1.Controls.Add(new TextBox() { Text = $"Some simple task #{i}", Dock = DockStyle.Fill, ReadOnly = true }, 0, i + 1);
                     tableLayoutPanel1.Controls.Add(new CheckBox() { Text = $"Some simple answer #{i}", Dock = DockStyle.Fill }, 1, i + 1);
                 }
                 else
                 {
+                    tableLayoutPanel1.Controls.Add(new TextBox() { Text = $"Some complicated task #{i}", Dock = DockStyle.Fill, ReadOnly = true }, 0, i + 1);
                     ComboBox cb = new ComboBox();
                     cb.Dock = DockStyle.Fill;
                     for (int j = 0; j < 6; j++)
