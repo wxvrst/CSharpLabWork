@@ -88,7 +88,7 @@ namespace CSharpLabWork
                     }
                     else
                     {
-                        elements[i].FigurePen = Pens.Green;
+                        elements[i].FigurePen = Pens.MediumVioletRed;
                         elements[i].Selected = false;
                     }
                     break;
