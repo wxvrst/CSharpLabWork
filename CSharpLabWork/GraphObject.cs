@@ -14,14 +14,14 @@ namespace CSharpLabWork
 
         public Color color;
         public bool Selected { get; set; }
-        public int PointX { get; init; }
-        public int PointY { get; init; }
+        public int PointX { get; set; }
+        public int PointY { get; set; }
         public Pen FigurePen { get; set; } = Pens.MediumVioletRed;
         public SolidBrush brush;
 
         public abstract bool ContainsPoint(MouseEventArgs e);
         public abstract void Draw(Graphics g);
-        public GraphObject(int maxPointX, int maxPointY, int pointX = 0, int pointY = 0)
+        public GraphObject(int pointX = 0, int pointY = 0)
         {
             color = Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
             if (PointX < 0 || PointY < 0)  { throw new ArgumentException("point < 0 !"); }

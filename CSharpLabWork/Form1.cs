@@ -14,7 +14,20 @@ namespace CSharpLabWork
         {
             this.Close();
         }
-        private void AddFigure(int pointX = 0, int pointY = 0)
+        private void AddFigure()
+        {
+            Random r = new Random();
+            if (r.Next(2) % 2 == 0)
+            {
+                elements.Add(new Rectangle(panel1.Size.Width, panel1.Size.Height, 0, 0));
+            }
+            else
+            {
+                elements.Add(new Ellipse(panel1.Size.Width, panel1.Size.Height, 0, 0));
+            }
+            panel1.Invalidate();
+        }
+        private void AddPointFigure(int pointX = 0, int pointY = 0)
         {
             Random r = new Random();
             if (r.Next(2) % 2 == 0) 
@@ -29,7 +42,35 @@ namespace CSharpLabWork
         }
         private void ClearFigures()
         {
-            panel1.Controls.Clear();
+            elements.RemoveRange(0, elements.Count);
+            Refresh();
+        }
+        private void DeleteFigure()
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (elements[i].Selected)
+                {
+                    elements.RemoveAt(i);
+                }
+            }
+            Refresh();
+        }
+        private void MoveFigure()
+        {
+            //function will move selected elementaround the form
+            foreach(GraphObject element in elements)
+            {
+                Random r = new Random();
+                if (element.Selected)
+                {
+                    element.PointX = r.Next(Math.Abs(panel1.Size.Width - Width));
+                    element.PointY = r.Next(Math.Abs(panel1.Size.Height - Height));
+                }
+                element.Selected = false;
+                element.FigurePen = Pens.MediumVioletRed;
+            }
+            panel1.Invalidate();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,6 +100,15 @@ namespace CSharpLabWork
             ClearFigures();
         }
 
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteFigure();
+        }
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            DeleteFigure();
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             foreach (GraphObject elem in elements)
@@ -70,15 +120,13 @@ namespace CSharpLabWork
 
         private void panel1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            AddFigure(e.X, e.Y);
+            AddPointFigure(e.X, e.Y);
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             for (int i = elements.Count - 1; i >= 0; i--) 
             {
-                // TODO: change this shit: only one element can be selected
-                // or not only one ?
                 if (elements[i].ContainsPoint(e))
                 {
                     if (!elements[i].Selected)
@@ -99,13 +147,21 @@ namespace CSharpLabWork
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //function will move selected element or elements around the form
-            elements.Add(new Rectangle(panel1.Size.Width, panel1.Size.Height, 0, 0));
-            elements.Add(new Ellipse(panel1.Size.Width, panel1.Size.Height, 0, 0));
+            AddFigure();
         }
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //function will remove selected element or elements from the form
+            ClearFigures();
+        }
+
+        private void deleteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DeleteFigure();
+        }
+
+        private void moveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoveFigure();
         }
     }
 }

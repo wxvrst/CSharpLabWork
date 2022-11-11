@@ -12,7 +12,7 @@ namespace CSharpLabWork
         public int AAxis { get; init; }
         public int BAxis { get; init; }
         public Ellipse(int maxPointX, int maxPointY, int pointX = 0, int pointY = 0)
-            : base(maxPointX, maxPointY, pointX, pointY)
+            : base(pointX, pointY)
         {
             AAxis = r.Next(10, maxPointX / 2);
             BAxis = r.Next(10, maxPointY / 2);
@@ -35,7 +35,7 @@ namespace CSharpLabWork
         public override bool ContainsPoint(MouseEventArgs e)
         {
             //(x-x0)^2/a^2 + (y-y0)^2/b^2 <=1
-            return Math.Pow((e.X - PointX) / AAxis, 2) + Math.Pow(e.Y - PointY / BAxis, 2) <= 1;
+            return Math.Pow((e.X - PointX) / AAxis, 2) + Math.Pow((e.Y - PointY) / BAxis, 2) <= 1;
         }
     }
 }

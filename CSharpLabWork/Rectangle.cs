@@ -13,7 +13,7 @@ namespace CSharpLabWork
         public int Width { get; init; }
         public int Height { get; init; }
         public Rectangle(int maxPointX, int maxPointY, int pointX = 0, int pointY = 0)
-            : base(maxPointX, maxPointY, pointX, pointY)
+            : base(pointX, pointY)
         {
             Width = r.Next(10, maxPointX / 2);
             Height = r.Next(10, maxPointY / 2);
