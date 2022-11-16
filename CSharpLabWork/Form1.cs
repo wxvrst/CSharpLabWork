@@ -58,7 +58,7 @@ namespace CSharpLabWork
         }
         private void MoveFigure()
         {
-            //function will move selected elementaround the form
+            //function will move selected element around the form
             foreach(GraphObject element in elements)
             {
                 Random r = new Random();
