@@ -16,7 +16,7 @@ namespace CSharpLabWork
         public bool Selected { get; set; }
         public int PointX { get; set; }
         public int PointY { get; set; }
-        public Pen FigurePen { get; set; } = Pens.MediumVioletRed;
+        public Pen FigurePen { get; set; } = new(Brushes.Red, 2);
         public SolidBrush brush;
 
         public abstract bool ContainsPoint(MouseEventArgs e);

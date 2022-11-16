@@ -68,7 +68,7 @@ namespace CSharpLabWork
                     element.PointY = r.Next(Math.Abs(panel1.Size.Height - Height));
                 }
                 element.Selected = false;
-                element.FigurePen = Pens.MediumVioletRed;
+                element.FigurePen.Color = Color.Red;
             }
             panel1.Invalidate();
         }
@@ -125,22 +125,20 @@ namespace CSharpLabWork
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            for (int i = elements.Count - 1; i >= 0; i--) 
+            int k = 0;
+            for (int i = elements.Count - 1; i >= 0; i--)
             {
-                if (elements[i].ContainsPoint(e))
-                {
-                    if (!elements[i].Selected)
-                    {
-                        elements[i].FigurePen = Pens.Blue;
-                        elements[i].Selected = true;
-                    }
-                    else
-                    {
-                        elements[i].FigurePen = Pens.MediumVioletRed;
-                        elements[i].Selected = false;
-                    }
-                    break;
-                }
+                if (elements[i].ContainsPoint(e)) { k = i; break; }
+            }
+            if (!elements[k].Selected)//todo: fix error when choosed clear space 
+            {
+                elements[k].FigurePen.Color = Color.Blue;
+                elements[k].Selected = true;
+            }
+            else
+            {
+                elements[k].FigurePen.Color = Color.Red;
+                elements[k].Selected = false;
             }
             panel1.Invalidate();
         }

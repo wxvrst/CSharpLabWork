@@ -35,7 +35,7 @@ namespace CSharpLabWork
         public override bool ContainsPoint(MouseEventArgs e)
         {
             //(x-x0)^2/a^2 + (y-y0)^2/b^2 <=1
-            return Math.Pow((e.X - PointX) / AAxis, 2) + Math.Pow((e.Y - PointY) / BAxis, 2) <= 1;
+            return Math.Pow((e.X - PointX) / AAxis, 2) + Math.Pow((e.Y - PointY) / BAxis, 2) <= 1; 
         }
     }
 }
