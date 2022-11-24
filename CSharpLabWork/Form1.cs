@@ -126,21 +126,24 @@ namespace CSharpLabWork
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             int k = 0;
-            for (int i = elements.Count - 1; i >= 0; i--)
+            if (elements.Count != 0)
             {
-                if (elements[i].ContainsPoint(e)) { k = i; break; }
+                for (int i = elements.Count - 1; i >= 0; i--)
+                {
+                    if (elements[i].ContainsPoint(e)) { k = i; break; }
+                }
+                if (!elements[k].Selected)//todo: fix error when choosed clear space + and shit with contains
+                {
+                    elements[k].FigurePen.Color = Color.Blue;
+                    elements[k].Selected = true;
+                }
+                else
+                {
+                    elements[k].FigurePen.Color = Color.Red;
+                    elements[k].Selected = false;
+                }
+                panel1.Invalidate();
             }
-            if (!elements[k].Selected)//todo: fix error when choosed clear space + if only one rectangle in the panel
-            {
-                elements[k].FigurePen.Color = Color.Blue;
-                elements[k].Selected = true;
-            }
-            else
-            {
-                elements[k].FigurePen.Color = Color.Red;
-                elements[k].Selected = false;
-            }
-            panel1.Invalidate();
         }
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
