@@ -130,7 +130,7 @@ namespace CSharpLabWork
             {
                 if (elements[i].ContainsPoint(e)) { k = i; break; }
             }
-            if (!elements[k].Selected)//todo: fix error when choosed clear space 
+            if (!elements[k].Selected)//todo: fix error when choosed clear space + if only one rectangle in the panel
             {
                 elements[k].FigurePen.Color = Color.Blue;
                 elements[k].Selected = true;
