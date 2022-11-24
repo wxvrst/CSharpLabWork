@@ -128,7 +128,7 @@ namespace CSharpLabWork
             int k = 0;
             if (elements.Count != 0)
             {
-                for (int i = elements.Count - 1; i >= 0; i--)
+                for (int i = 0; i < elements.Count; i++) 
                 {
                     if (elements[i].ContainsPoint(e)) { k = i; break; }
                 }
