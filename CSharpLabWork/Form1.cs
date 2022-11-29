@@ -167,5 +167,15 @@ namespace CSharpLabWork
         {
             MoveFigure();
         }
+
+        private void moveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MoveFigure();
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            MoveFigure();
+        }
     }
 }

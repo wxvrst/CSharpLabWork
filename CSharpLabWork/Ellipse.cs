@@ -13,6 +13,10 @@ namespace CSharpLabWork
             : base(maxPointX, maxPointY, pointX, pointY)
         {
         }
+        public Ellipse()
+            : base()
+        {
+        }
         public override void Draw(Graphics g)
         {
             g.FillEllipse(brush, PointX, PointY, Width, Height);

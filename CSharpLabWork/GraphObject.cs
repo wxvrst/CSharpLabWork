@@ -23,6 +23,10 @@ namespace CSharpLabWork
 
         public abstract bool ContainsPoint(MouseEventArgs e);
         public abstract void Draw(Graphics g);
+        public GraphObject()
+        {
+
+        }
         public GraphObject(int maxPointX, int maxPointY, int pointX = 0, int pointY = 0)
         {
             color = Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
@@ -42,6 +46,5 @@ namespace CSharpLabWork
                 PointY = pointY;
             }
         }
-
     }
 }

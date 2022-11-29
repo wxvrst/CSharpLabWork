@@ -15,6 +15,10 @@ namespace CSharpLabWork
         {
 
         }
+        public Rectangle()
+            :base()
+        {
+        }
         public override void Draw(Graphics g)
         {
             g.FillRectangle(brush, PointX, PointY, Width, Height);
