@@ -20,8 +20,11 @@ namespace CSharpLabWork
         }
         public override bool ContainsPoint(MouseEventArgs e)
         {
-
-            return Math.Pow((e.X - PointX) / Width, 2) + Math.Pow((e.Y - PointY) / Height, 2) <= 1;
+            double cx = PointX + Width / 2;
+            double a = Width / 2;
+            double cy = PointY + Height / 2;
+            double b = Height / 2;
+            return (e.X - cx) * (e.X - cx) / (a * a) + (e.Y - cy) * (e.Y - cy) / (b * b) <= 1;
         }
     }
 }

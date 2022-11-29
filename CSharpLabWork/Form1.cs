@@ -125,22 +125,25 @@ namespace CSharpLabWork
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            int k = 0;
+            int k = -1;
             if (elements.Count != 0)
             {
-                for (int i = 0; i < elements.Count; i++) 
+                for (int i = elements.Count - 1; i >= 0; i--) 
                 {
                     if (elements[i].ContainsPoint(e)) { k = i; break; }
                 }
-                if (!elements[k].Selected)//todo: fix error when choosed clear space + and shit with contains
+                if (k != -1)
                 {
-                    elements[k].FigurePen.Color = Color.Blue;
-                    elements[k].Selected = true;
-                }
-                else
-                {
-                    elements[k].FigurePen.Color = Color.Red;
-                    elements[k].Selected = false;
+                    if (!elements[k].Selected)//todo: fix shit with contains
+                    {
+                        elements[k].FigurePen.Color = Color.Blue;
+                        elements[k].Selected = true;
+                    }
+                    else
+                    {
+                        elements[k].FigurePen.Color = Color.Red;
+                        elements[k].Selected = false;
+                    }
                 }
                 panel1.Invalidate();
             }
