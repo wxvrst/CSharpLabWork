@@ -64,8 +64,9 @@ namespace CSharpLabWork
                 Random r = new Random();
                 if (element.Selected)
                 {
-                    element.PointX = r.Next(Math.Abs(panel1.Size.Width - Width));
-                    element.PointY = r.Next(Math.Abs(panel1.Size.Height - Height));
+
+                    element.PointX = r.Next(panel1.Size.Width - element.Width);
+                    element.PointY = r.Next(panel1.Size.Height - element.Height);
                 }
                 element.Selected = false;
                 element.FigurePen.Color = Color.Red;
