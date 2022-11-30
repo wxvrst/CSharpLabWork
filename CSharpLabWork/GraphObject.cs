@@ -11,34 +11,29 @@ namespace CSharpLabWork
     internal abstract class GraphObject : IFigureBuilding
     {
         static Random r = new Random();
-
+        static public Size PanelSize { get; set; }
         public Color color;
         public bool Selected { get; set; }
         public int PointX { get; set; }
         public int PointY { get; set; }
         public int Width { get; init; }
         public int Height { get; init; }
-        public Pen FigurePen { get; set; } = new(Brushes.Red, 2);
         public SolidBrush brush;
 
         public abstract bool ContainsPoint(MouseEventArgs e);
         public abstract void Draw(Graphics g);
-        public GraphObject()
-        {
 
-        }
-        public GraphObject(int maxPointX, int maxPointY, int pointX = 0, int pointY = 0)
+        public GraphObject(int pointX = 0, int pointY = 0)
         {
             color = Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
-            if (PointX < 0 || PointY < 0)  { throw new ArgumentException("point < 0 !"); }
             brush = new SolidBrush(color);
 
-            Width = r.Next(maxPointX/8, maxPointX / 2);
-            Height = r.Next(maxPointY/8, maxPointY / 2);
+            Width = r.Next(PanelSize.Width / 8, PanelSize.Width / 2);
+            Height = r.Next(PanelSize.Height / 8, PanelSize.Height / 2);
             if (pointX == 0 && pointY == 0)
             {
-                PointX = r.Next(maxPointX - Width);
-                PointY = r.Next(maxPointY - Height);
+                PointX = r.Next(PanelSize.Width - Width);
+                PointY = r.Next(PanelSize.Height - Height);
             }
             else
             {

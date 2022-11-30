@@ -9,18 +9,21 @@ namespace CSharpLabWork
     internal class Ellipse : GraphObject
     {
         static Random r = new Random();
-        public Ellipse(int maxPointX, int maxPointY, int pointX = 0, int pointY = 0)
-            : base(maxPointX, maxPointY, pointX, pointY)
-        {
-        }
-        public Ellipse()
-            : base()
+        public Ellipse(int pointX = 0, int pointY = 0)
+            : base(pointX, pointY)
         {
         }
         public override void Draw(Graphics g)
         {
             g.FillEllipse(brush, PointX, PointY, Width, Height);
-            g.DrawEllipse(FigurePen, PointX, PointY, Width, Height);
+            if (Selected)
+            {
+                g.DrawEllipse(Pens.Blue, PointX, PointY, Width, Height);
+            }
+            else
+            {
+                g.DrawEllipse(Pens.Red, PointX, PointY, Width, Height);
+            }
         }
         public override bool ContainsPoint(MouseEventArgs e)
         {

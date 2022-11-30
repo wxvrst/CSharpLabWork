@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace CSharpLabWork
 {
-    internal class RandomObjectFactory
+    internal class RandomObjectFactory : IGraphicFactory
     {
         public GraphObject CreateGraphObject()
         {

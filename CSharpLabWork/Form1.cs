@@ -1,14 +1,20 @@
 using System.Xml.Linq;
-
 namespace CSharpLabWork
 {
     public partial class Form1 : Form
     {
+        List<GraphObject> elements = new List<GraphObject>();
+        Random random = new Random();
+        private IGraphicFactory factory = new RandomObjectFactory();
+        private RandomObjectFactory randomFactory = new RandomObjectFactory();
+        private TwoTypeFactory twoTypeFactory = new TwoTypeFactory();
+
         public Form1()
         {
             InitializeComponent();
+            toolStripComboBox1.SelectedIndex = 0;
+            GraphObject.PanelSize = panel1.ClientSize;
         }
-        List<GraphObject> elements = new List<GraphObject>();
 
         private void Exit()
         {
@@ -16,28 +22,16 @@ namespace CSharpLabWork
         }
         private void AddFigure()
         {
-            Random r = new Random();
-            if (r.Next(2) % 2 == 0)
-            {
-                elements.Add(new Rectangle(panel1.Size.Width, panel1.Size.Height, 0, 0));
-            }
-            else
-            {
-                elements.Add(new Ellipse(panel1.Size.Width, panel1.Size.Height, 0, 0));
-            }
+            elements.Add(factory.CreateGraphObject());
             panel1.Invalidate();
         }
-        private void AddPointFigure(int pointX = 0, int pointY = 0)
+        private void AddPointFigure(int pointX , int pointY )
         {
-            Random r = new Random();
-            if (r.Next(2) % 2 == 0) 
-            {
-                elements.Add(new Rectangle(panel1.Size.Width, panel1.Size.Height, pointX, pointY));
-            }
-            else
-            {
-                elements.Add(new Ellipse(panel1.Size.Width, panel1.Size.Height, pointX, pointY));
-            }
+            GraphObject pointFigure = factory.CreateGraphObject();
+            pointFigure.PointX = pointX;
+            pointFigure.PointY = pointY;
+
+            elements.Add(pointFigure);
             panel1.Invalidate();
         }
         private void ClearFigures()
@@ -61,15 +55,13 @@ namespace CSharpLabWork
             //function will move selected element around the form
             foreach(GraphObject element in elements)
             {
-                Random r = new Random();
                 if (element.Selected)
                 {
 
-                    element.PointX = r.Next(panel1.Size.Width - element.Width);
-                    element.PointY = r.Next(panel1.Size.Height - element.Height);
+                    element.PointX = random.Next(panel1.Size.Width - element.Width);
+                    element.PointY = random.Next(panel1.Size.Height - element.Height);
                 }
                 element.Selected = false;
-                element.FigurePen.Color = Color.Red;
             }
             panel1.Invalidate();
         }
@@ -126,28 +118,53 @@ namespace CSharpLabWork
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            int k = -1;
-            if (elements.Count != 0)
+            if (elements.Count == 0)
             {
-                for (int i = elements.Count - 1; i >= 0; i--) 
-                {
-                    if (elements[i].ContainsPoint(e)) { k = i; break; }
-                }
-                if (k != -1)
-                {
-                    if (!elements[k].Selected)//todo: fix shit with contains
-                    {
-                        elements[k].FigurePen.Color = Color.Blue;
-                        elements[k].Selected = true;
-                    }
-                    else
-                    {
-                        elements[k].FigurePen.Color = Color.Red;
-                        elements[k].Selected = false;
-                    }
-                }
-                panel1.Invalidate();
+                MessageBox.Show("There is no one figure!");
             }
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    for (int i = elements.Count - 1; i >= 0; i--)
+                    {
+                        if (elements[i].ContainsPoint(e))
+                        {
+                            if (!elements[i].Selected)
+                            {
+                                elements[i].Selected = true;
+                            }
+                            else
+                            {
+                                elements[i].Selected = false;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                int k = -1;
+                for (int i = elements.Count - 1; i >= 0; i--)
+                {
+                    if (k == -1 && elements[i].ContainsPoint(e))
+                    {
+                        if (!elements[i].Selected)
+                        {
+                            elements[i].Selected = true;
+                        }
+                        else
+                        {
+                            elements[i].Selected = false;
+                        }
+                        k = i;
+                    }
+                    else { elements[i].Selected = false; }
+                }
+
+            }
+            panel1.Invalidate();
         }
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
@@ -177,6 +194,18 @@ namespace CSharpLabWork
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             MoveFigure();
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (toolStripComboBox1.SelectedIndex == 0)
+            {
+                factory = randomFactory;
+            }
+            else
+            {
+                factory = twoTypeFactory;
+            }
         }
     }
 }
