@@ -22,7 +22,7 @@ namespace CSharpLabWork
             }
             else
             {
-                g.DrawEllipse(Pens.Red, PointX, PointY, Width, Height);
+                g.DrawEllipse(Pens.Transparent, PointX, PointY, Width, Height);
             }
         }
         public override bool ContainsPoint(MouseEventArgs e)

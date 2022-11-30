@@ -24,7 +24,7 @@ namespace CSharpLabWork
             }
             else
             {
-                g.DrawRectangle(Pens.Red, PointX, PointY, Width, Height);
+                g.DrawRectangle(Pens.Transparent, PointX, PointY, Width, Height);
             }
         }
         public override bool ContainsPoint(MouseEventArgs e)

@@ -45,7 +45,7 @@ namespace CSharpLabWork
             {
                 if (elements[i].Selected)
                 {
-                    elements.RemoveAt(i);
+                    elements.RemoveAt(i);//todo: fix situation when delets not all selected figures
                 }
             }
             Refresh();

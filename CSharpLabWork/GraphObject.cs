@@ -26,6 +26,7 @@ namespace CSharpLabWork
         public GraphObject(int pointX = 0, int pointY = 0)
         {
             color = Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
+            color.ToKnownColor();
             brush = new SolidBrush(color);
 
             Width = r.Next(PanelSize.Width / 8, PanelSize.Width / 2);
