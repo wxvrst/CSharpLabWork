@@ -16,8 +16,8 @@ namespace CSharpLabWork
         public bool Selected { get; set; }
         public int PointX { get; set; }
         public int PointY { get; set; }
-        public int Width { get; init; }
-        public int Height { get; init; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         public SolidBrush brush;
 
         public abstract bool ContainsPoint(MouseEventArgs e);
@@ -31,16 +31,9 @@ namespace CSharpLabWork
 
             Width = r.Next(PanelSize.Width / 8, PanelSize.Width / 2);
             Height = r.Next(PanelSize.Height / 8, PanelSize.Height / 2);
-            if (pointX == 0 && pointY == 0)
-            {
-                PointX = r.Next(PanelSize.Width - Width);
-                PointY = r.Next(PanelSize.Height - Height);
-            }
-            else
-            {
-                PointX = pointX;
-                PointY = pointY;
-            }
+            PointX = r.Next(PanelSize.Width - Width);
+            PointY = r.Next(PanelSize.Height - Height);
+
         }
     }
 }

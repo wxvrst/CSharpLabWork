@@ -45,14 +45,13 @@ namespace CSharpLabWork
             {
                 if (elements[i].Selected)
                 {
-                    elements.RemoveAt(i);//todo: fix situation when delets not all selected figures
+                    //elements.RemoveAt(i);//todo: fix situation when delets not all selected figures
                 }
             }
-            Refresh();
+            panel1.Invalidate();
         }
         private void MoveFigure()
         {
-            //function will move selected element around the form
             foreach(GraphObject element in elements)
             {
                 if (element.Selected)
@@ -118,10 +117,7 @@ namespace CSharpLabWork
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (elements.Count == 0)
-            {
-                MessageBox.Show("There is no one figure!");
-            }
+
             if (Control.ModifierKeys == Keys.Control)
             {
                 if (e.Button == MouseButtons.Left)
