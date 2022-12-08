@@ -6,5 +6,7 @@ namespace CSharpLabWork
         {
             InitializeComponent();
         }
+        List<IView> views = new List<IView>();
+        List<IModel> models = new List<IModel>();
     }
 }
