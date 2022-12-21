@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace CSharpLabWork
 {
-    internal interface IModel
+    public interface IModel
     {
+        IEnumerable<Node> AllNodes { get;}
         void AddNode(int value);
+        void RemoveNode(Node node);
         void RemoveLastNode();
         int Count { get; }
+
+        event Action Changed;
     }
 }

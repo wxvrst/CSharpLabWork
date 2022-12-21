@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharpLabWork
 {
-    internal interface IView
+    public interface IView
     {
         IModel Model { get; set; }
         void UpdateView();

@@ -7,21 +7,38 @@ using System.Threading.Tasks;
 
 namespace CSharpLabWork
 {
-    internal class MyModel : IModel
+    public class MyModel : IModel
     {
         LinkedList<Node> nodes=new LinkedList<Node>();
         static Random random = new Random();
 
-        public int Count { get { return nodes.Count; } set { Count = value; } }
+        public event Action Changed;
 
-        public void AddNode(int value)
+        public int Count => nodes.Count;
+
+        public IEnumerable<Node> AllNodes => nodes;
+
+        public void AddNode(int value) 
         {
-            nodes.AddFirst(new Node(value, random.Next(10), random.Next(10)));
+            nodes.AddFirst(new Node(value, random.Next(40), random.Next(40)));
+            if (Changed != null)
+                Changed();
         }
-
         public void RemoveLastNode()
         {
             nodes.RemoveLast();
+            if (Changed != null)
+                Changed();
+        }
+
+        public void RemoveNode(Node node)
+        {
+            nodes.Remove(node);
+            if (Changed != null)
+            {
+                Changed();
+            }
+        }
+
         }
     }
-}

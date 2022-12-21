@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CSharpLabWork
 {
-    internal interface IController
+    public interface IController
     {
         IModel Model { get; set; }
-        void AddView(IView v);
+        void AddView(IView view);
         void Add();
         void Remove();
     }
