@@ -5,14 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Xml.Linq;
+using System.Threading.Channels;
 
 namespace CSharpLabWork
 {
     public delegate void NodeClicked(Node node);
-    internal class PanelView : Panel, IView
+    public class PanelView : Panel, IView
     {
         IModel model;
-        public event NodeClicked OnNodeClicked;
+        NodeClicked onNodeClicked = null;
+        public event NodeClicked OnNodeClicked
+        {
+            add { onNodeClicked += value; }
+            remove { onNodeClicked -= value; }
+        }
+        public void InvokeEvent(Node node)
+        {
+            if (onNodeClicked != null)
+            {
+                onNodeClicked.Invoke(node);
+            }
+        }
         public IModel Model { get { return model; } set { model = value; } }
 
         public void UpdateView()
@@ -24,9 +37,9 @@ namespace CSharpLabWork
             base.OnMouseClick(e);
             foreach (Node node in model.AllNodes)
             {
-                if (Math.Pow(e.X - (node.X * 20) % (this.Size.Width - 20) - 10, 2) + Math.Pow(e.Y - (node.Y * 20) % (this.Size.Height - 20) - 10, 2) <= 100 && OnNodeClicked != null)
+                if (Math.Pow(e.X - (node.X * 20) % (this.Size.Width - 20) - 10, 2) + Math.Pow(e.Y - (node.Y * 20) % (this.Size.Height - 20) - 10, 2) <= 100 && onNodeClicked != null)
                 {
-                    OnNodeClicked(node);
+                    InvokeEvent(node);
                     return;
                 }
             }

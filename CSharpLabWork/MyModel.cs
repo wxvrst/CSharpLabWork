@@ -11,9 +11,19 @@ namespace CSharpLabWork
     {
         LinkedList<Node> nodes=new LinkedList<Node>();
         static Random random = new Random();
-
-        public event Action Changed;
-
+        Action changed = null;
+        public event Action Changed
+        {
+            add { changed += value; }
+            remove { changed -= value; }
+        }
+        public void InvokeEvent()
+        {
+            if (changed != null)
+            {
+                changed.Invoke();
+            }
+        }
         public int Count => nodes.Count;
 
         public IEnumerable<Node> AllNodes => nodes;
@@ -21,24 +31,19 @@ namespace CSharpLabWork
         public void AddNode(int value) 
         {
             nodes.AddFirst(new Node(value, random.Next(40), random.Next(40)));
-            if (Changed != null)
-                Changed();
+            InvokeEvent();
         }
         public void RemoveLastNode()
         {
             nodes.RemoveLast();
-            if (Changed != null)
-                Changed();
+            InvokeEvent();
         }
 
         public void RemoveNode(Node node)
         {
             nodes.Remove(node);
-            if (Changed != null)
-            {
-                Changed();
-            }
+            InvokeEvent();
         }
 
-        }
     }
+}
