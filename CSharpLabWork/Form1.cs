@@ -46,6 +46,7 @@ namespace CSharpLabWork
                 if (elements[i].Selected)
                 {
                     elements.RemoveAt(i);
+                    i=0;
                 }
             }
             panel1.Invalidate();
