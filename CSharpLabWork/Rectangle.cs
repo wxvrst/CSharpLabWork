@@ -10,14 +10,14 @@ namespace CSharpLabWork
     internal class Rectangle : GraphObject
     {
         static Random r = new Random();
-        public Rectangle(int pointX = 0, int pointY = 0)
-            : base(pointX, pointY)
+        public Rectangle()
+            : base()
         {
 
         }
         public override void Draw(Graphics g)
         {
-            g.FillRectangle(brush, PointX, PointY, Width, Height);
+            g.FillRectangle(Brush, PointX, PointY, Width, Height);
             if (Selected)
             {
                 g.DrawRectangle(Pens.Blue, PointX, PointY, Width, Height);

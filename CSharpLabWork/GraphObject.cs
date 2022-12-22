@@ -11,19 +11,27 @@ namespace CSharpLabWork
     internal abstract class GraphObject : IFigureBuilding
     {
         static Random r = new Random();
-        static public Size PanelSize { get; set; }
-        public Color color;
-        public bool Selected { get; set; }
-        public int PointX { get; set; }
-        public int PointY { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public SolidBrush brush;
+        static Size panelSize;
+        Color color;
+        bool selected;
+        int pointX;
+        int pointY;
+        int width;
+        int height;
+        SolidBrush brush;
+        public static Size PanelSize { get { return panelSize; } set { panelSize = value; } }
+        public Color Color { get { return color; } set { color = value; } }
+        public bool Selected { get { return selected; } set { selected = value; } }
+        public int PointX { get { return pointX; } set { pointX = value; } }
+        public int PointY { get { return pointY; } set { pointY = value; } }
+        public int Width { get { return width; } set { width = value; } }
+        public int Height { get { return height; } set { height = value; } }
+        public SolidBrush Brush { get { return brush; } set { brush = value; } }
 
         public abstract bool ContainsPoint(MouseEventArgs e);
         public abstract void Draw(Graphics g);
 
-        public GraphObject(int pointX = 0, int pointY = 0)
+        public GraphObject()
         {
             color = Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
             color.ToKnownColor();

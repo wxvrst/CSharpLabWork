@@ -41,12 +41,12 @@ namespace CSharpLabWork
         }
         private void DeleteFigure()
         {
-            for (int i = 0; i < elements.Count; i++)
+            for (int i = elements.Count - 1; i >= 0; i--) 
             {
                 if (elements[i].Selected)
                 {
                     elements.RemoveAt(i);
-                    i=0;
+                    i = elements.Count;
                 }
             }
             panel1.Invalidate();
@@ -108,7 +108,6 @@ namespace CSharpLabWork
             {
                 elem.Draw(e.Graphics);
             }
-
         }
 
         private void panel1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -203,6 +202,11 @@ namespace CSharpLabWork
             {
                 factory = twoTypeFactory;
             }
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            GraphObject.PanelSize = panel1.ClientSize;
         }
     }
 }
