@@ -20,6 +20,8 @@ namespace CSharpLabWork
             panelView2.UpdateView();
             panelView2.OnNodeClicked += Model.RemoveNode;
             AddView(panelView2);
+            myDataGrid1.Model=Model;
+            AddView(myDataGrid1);
         }
         public void Add()
         {
@@ -39,8 +41,6 @@ namespace CSharpLabWork
         private void button1_Click(object sender, EventArgs e)
         {
             Add();
-            myDataGrid1.AutoGenerateColumns = true;
-            myDataGrid1.DataSource = Model.AllNodes.ToArray();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -51,10 +51,8 @@ namespace CSharpLabWork
             }
             else
             {
-                MessageBox.Show("Èòàê íîëü");
+                MessageBox.Show("ÃˆÃ²Ã Ãª Ã­Ã®Ã«Ã¼");
             }
-            myDataGrid1.AutoGenerateColumns = true;
-            myDataGrid1.DataSource = Model.AllNodes.ToArray();
         }
     }
 }
