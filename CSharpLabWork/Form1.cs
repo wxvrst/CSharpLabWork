@@ -13,14 +13,9 @@ namespace CSharpLabWork
             InitializeComponent();
             Model = new MyModel();
             IView labView = new LabelView(label1);
-            labView.Model = Model;
-            labView.UpdateView();
             AddView(labView);
-            panelView2.Model = Model;
-            panelView2.UpdateView();
             panelView2.OnNodeClicked += Model.RemoveNode;
             AddView(panelView2);
-            myDataGrid1.Model=Model;
             AddView(myDataGrid1);
         }
         public void Add()
@@ -30,7 +25,9 @@ namespace CSharpLabWork
 
         public void AddView(IView view)
         {
+            view.Model = Model;
             model.Changed += new Action(view.UpdateView);
+            view.UpdateView();
         }
 
         public void Remove()
@@ -51,7 +48,7 @@ namespace CSharpLabWork
             }
             else
             {
-                MessageBox.Show("Èòàê íîëü");
+                MessageBox.Show("It's already zero");
             }
         }
     }

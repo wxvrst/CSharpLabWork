@@ -35,9 +35,9 @@ namespace CSharpLabWork
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
-            foreach (Node node in model.AllNodes)
+            foreach (Node node in model.AllNodes.Reverse())
             {
-                if (Math.Pow(e.X - (node.X * 20) % (this.Size.Width - 20) - 10, 2) + Math.Pow(e.Y - (node.Y * 20) % (this.Size.Height - 20) - 10, 2) <= 100 && onNodeClicked != null)
+                if (Math.Pow(e.X - (node.X * 20) % (this.Size.Width - 20) - 10, 2) + Math.Pow(e.Y - (node.Y * 20) % (this.Size.Height - 20) - 10, 2) <= 100 )
                 {
                     InvokeEvent(node);
                     return;
